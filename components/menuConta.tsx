@@ -95,8 +95,6 @@ const MenuConta: React.FC<MConta> = props => {
     // Convert PDF Buffer to Image for Tesseract.js
     const pdf = await getDocument(URL.createObjectURL(file)).promise;
     let pdfText = '';
-    const aaa = 0;
-    const bbb = 0;
     const page = await pdf.getPage(1);
     const viewport = page.getViewport({ scale: 2 });
     const canvas = document.createElement('canvas');
