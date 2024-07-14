@@ -96,6 +96,7 @@ const MenuConta: React.FC<MConta> = props => {
     const pdf = await getDocument(URL.createObjectURL(file)).promise;
     let pdfText = '';
     const aaa = 0;
+    const bbb = 0;
     const page = await pdf.getPage(1);
     const viewport = page.getViewport({ scale: 2 });
     const canvas = document.createElement('canvas');
