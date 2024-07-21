@@ -18,7 +18,7 @@ const TodasAsContas = async ({ params }) => {
 
   return (
     <div className='overflow-hidden px-10'>
-      <div className='flex flex-row space-x-3'>
+      <div className='relative flex flex-row space-x-3'>
         <h1>{contaFor.name}</h1>
         <form action={AddContaFor} className='pt-8'>
             <input type="hidden" name='name' value={contaFor.name} />
@@ -26,6 +26,7 @@ const TodasAsContas = async ({ params }) => {
 
             <button type='submit'><Image src="/img_plus.png" alt="" width={30} height={30} /></button>
         </form>
+        <p className='absolute right-72 top-8'>Pagamento | Vencimento</p>
       </div>
 
         <div className={stl_container}>

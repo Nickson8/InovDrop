@@ -108,7 +108,7 @@ const MenuConta: React.FC<MConta> = props => {
     const imageData = context?.getImageData(0, 0, canvas.width, canvas.height);
     if (imageData && imageData.data) {
       const datai = imageData.data;
-      const threshold = 220; // You can adjust this value as needed
+      const threshold = 235; // You can adjust this value as needed
 
       for(let i = 0; i < datai.length; i += 4) {
           const brightness = 0.34 * datai[i] + 0.5 * datai[i + 1] + 0.16 * datai[i + 2];
@@ -124,7 +124,7 @@ const MenuConta: React.FC<MConta> = props => {
     }
 
     // Convert canvas to data URL
-    const dataURL = canvas.toDataURL('image/png');
+    /*const dataURL = canvas.toDataURL('image/png');
 
     // Create a link element
     const link = document.createElement('a');
@@ -136,7 +136,7 @@ const MenuConta: React.FC<MConta> = props => {
     link.click();
 
     // Remove the link from the document
-    document.body.removeChild(link);
+    document.body.removeChild(link);*/
 
 
     const text = await Tesseract.recognize(canvas, 'por').then(({ data: { text } }) => text);

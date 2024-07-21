@@ -21,6 +21,7 @@ const ContasVariadas = async () => {
             <Link href={'/contas/variadas/add'} className='pt-8'>
                 <span><Image src="/img_plus.png" alt="" width={30} height={30} /></span>
             </Link>
+            <p className='pt-8 pl-80'>Pagamento | Vencimento</p>
           </div>
 
           {contas.reverse().map((conta) => {

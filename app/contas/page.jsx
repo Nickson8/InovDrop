@@ -3,6 +3,15 @@ import { fetchContas } from '@/app/lib/data';
 import Image from 'next/image'
 
 
+function condToday(date) {
+  const today = new Date()
+  if ((date < today.getTime()) && (date - today.getTime() > -86400000)){
+    return true;
+  } else {
+    return false;
+  }
+}
+
 export default async function Contas() {
   var stl_container_home = "relative shadow-md w-full h-full px-5 py-2 rounded-lg border border-gray-300 overflow-auto bg-gray-50 space-y-0"
   var stl_sub_container = 'w-full border-b border-gray-400 pt-2 flex flex-row items-center bg-gray-50 relative'
@@ -17,7 +26,7 @@ export default async function Contas() {
 
   // Calculate total
   contas.forEach((conta) => {
-    if ((conta.due_date.getTime() < today.getTime()) && (conta.due_date.getTime() - today.getTime() > -86400000) && conta.pag ===false) {
+    if (condToday(conta.due_date.getTime()) && conta.pag ===false) {
       venTotal += conta.total;
     }
 
@@ -44,7 +53,7 @@ export default async function Contas() {
 
           <p className="text-lg">Fornecedores</p>
           {contas.reverse().map((conta) => {
-            if (conta.due_date.getTime() < today.getTime() && conta.due_date.getTime() - today.getTime() > -86400000 && conta.type ==='for' && conta.pag ===false) {
+            if (condToday(conta.due_date.getTime()) && conta.type ==='for' && conta.pag ===false) {
               return (
               <MenuConta
                 key={conta.id}
@@ -64,7 +73,7 @@ export default async function Contas() {
 
           <p className="pt-2 text-lg">Fixas</p>
           {contas.reverse().map((conta) => {
-            if (conta.due_date.getTime() < today.getTime() && conta.due_date.getTime() - today.getTime() > -86400000 && conta.type ==='fix' && conta.pag ===false) {
+            if (condToday(conta.due_date.getTime()) && conta.type ==='fix' && conta.pag ===false) {
               return (
               <MenuConta
                 key={conta.id}
@@ -84,7 +93,7 @@ export default async function Contas() {
 
           <p className="pt-2 text-lg">Variadas</p>
           {contas.reverse().map((conta) => {
-            if (conta.due_date.getTime() < today.getTime() && conta.due_date.getTime() - today.getTime() > -86400000 && conta.type ==='var' && conta.pag ===false) {
+            if (condToday(conta.due_date.getTime()) && conta.type ==='var' && conta.pag ===false) {
               return (
               <div key='9384093580358'>
                 <MenuConta

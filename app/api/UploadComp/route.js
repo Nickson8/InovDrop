@@ -4,6 +4,7 @@ import { NextResponse, NextRequest } from 'next/server';
 import { connectToDB } from '@/app/lib/utils';
 import { Contssss } from '@/app/lib/models';
 import {v2 as cloudinary} from 'cloudinary';
+import { revalidatePath } from'next/cache';
 
 
 
@@ -81,6 +82,11 @@ export const POST = async (req, res) => {
 
         //Colocando os dados recebidos na variavel com o 'await' para que o programa espere
         const ddd = await ddPromise;
+
+        revalidatePath('/contas')
+        revalidatePath('/contas/pagas')
+        revalidatePath('/contas/contas_a_pagar')
+        revalidatePath('/contas/variadas')
         
 
 

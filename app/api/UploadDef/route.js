@@ -4,6 +4,7 @@ import { NextResponse, NextRequest } from 'next/server';
 import { connectToDB } from '@/app/lib/utils';
 import { Contssss } from '@/app/lib/models';
 import {v2 as cloudinary} from 'cloudinary';
+import { revalidatePath } from'next/cache';
 
 
 cloudinary.config({ 
@@ -14,7 +15,9 @@ cloudinary.config({
 });
 
 
-
+function removeNewlines(str) {
+    return str.replace(/[\r\n]/g, '');
+}
 
 
 //ANALISE DO SCD
@@ -91,6 +94,10 @@ function getDueDate(string) {
 
     // Cleaning the list of words
     words = words.filter(x => x !== '' && x !== ' ');
+
+    words = words.map(removeNewlines);
+
+    console.log(words);
 
     // Finding the date by Method 1 ('in')
     let dates = [];
@@ -251,6 +258,7 @@ export const POST = async (req, res) => {
         try {
             connectToDB();
             const cloudBuffer = new Uint8Array(bytes);
+            const base64File = Buffer.from(cloudBuffer).toString('base64');
         
             // Deletando o arquivo anterior
             if (urll != '') {
@@ -274,7 +282,7 @@ export const POST = async (req, res) => {
             });
         
             const url = dados.secure_url;
-            console.log('Upload successful, URL:', url);
+            //console.log('Upload successful, URL:', url);
         
             await Contssss.findByIdAndUpdate(idd, { bol: url });
         } catch (err) {
@@ -282,12 +290,13 @@ export const POST = async (req, res) => {
             throw new Error('Falhou ao fazer o upload do boleto');
         }
 
+        
         //Extracting the information from the text
         let scd = get_scd(text);
         //console.log(scd);
 
         let dueDate = getDueDate(text);
-        //console.log(dueDate);
+        console.log(dueDate);
         if(dueDate != 'ERROR-DATE'){
             let parts = dueDate.split("/");
             if(parts[2].length === 2){
@@ -305,12 +314,19 @@ export const POST = async (req, res) => {
         connectToDB();
 
         await Contssss.findByIdAndUpdate(idd, {scd:scd});
+
         if(dueDate != 'ERROR-DATE'){
             await Contssss.findByIdAndUpdate(idd, {due_date:dateObject});
         }
+
         if(total != -Infinity){
             await Contssss.findByIdAndUpdate(idd, {total:total});
         }
+
+        revalidatePath('/contas')
+        revalidatePath('/contas/pagas')
+        revalidatePath('/contas/contas_a_pagar')
+        revalidatePath('/contas/variadas')
 
         // The recognized text is stored in the 'text' variable
         const ddd = '';

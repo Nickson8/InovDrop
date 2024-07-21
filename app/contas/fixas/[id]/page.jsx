@@ -14,10 +14,14 @@ const ContaFixa = async ({ params }) => {
   const compareDates = (a, b) => a.due_date - b.due_date;
 
   return (
-    <div className='overflow-hidden px-10'>
-        <h1>{contaFixa.name}</h1>
+    <div className='relative overflow-hidden px-10'>
+        <div className='flex flex-row'>
+          <h1>{contaFixa.name}</h1>
+          <p className='ml-auto pt-8 pr-72'>Pagamento | Vencimento</p>
+        </div>
 
         <div className={stl_container}>
+
             {contas.sort(compareDates).reverse().map((conta) => {
               if (conta.name.includes(contaFixa.name) && conta.type === 'fix') {
                 if (conta.pag === false) {
