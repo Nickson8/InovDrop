@@ -73,4 +73,13 @@ const TodasAsContas = async ({ params }) => {
   )
 }
 
+export async function generateStaticParams() {
+  const contas = await fetchContas();
+  const forContas = contas.filter(conta => conta.type === 'for');
+  
+  return forContas.map((conta) => ({
+    id: conta.name.toString(),
+  }));
+}
+
 export default TodasAsContas

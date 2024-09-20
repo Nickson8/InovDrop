@@ -66,4 +66,13 @@ const ContaFixa = async ({ params }) => {
   )
 }
 
+export async function generateStaticParams() {
+  const contas = await fetchContas();
+  const fixedContas = contas.filter(conta => conta.type === 'fix');
+  
+  return fixedContas.map((conta) => ({
+    id: conta.name.toString(),
+  }));
+}
+
 export default ContaFixa
