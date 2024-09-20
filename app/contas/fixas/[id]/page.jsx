@@ -66,6 +66,25 @@ const ContaFixa = async ({ params }) => {
   )
 }
 
+export async function getServerSideProps(context) {
+  // Fetch your dynamic data here
+  const contas = await fetchContas();
+  const { name } = context.params; // Get the dynamic route id
 
+  // Filter based on your logic
+  const fixedContas = contas.filter(conta => conta.type === 'fix' && conta.id.toString() === name);
+
+  if (fixedContas.length === 0) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      conta: fixedContas[0], // Pass the first match to the page as a prop
+    },
+  };
+}
 
 export default ContaFixa
