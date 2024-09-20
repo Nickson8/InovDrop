@@ -96,7 +96,7 @@ function getDueDate(string) {
     words = words.filter(x => x !== '' && x !== ' ');
 
     words = words.map(removeNewlines);
-
+    //Aiai
     console.log(words);
 
     // Finding the date by Method 1 ('in')
