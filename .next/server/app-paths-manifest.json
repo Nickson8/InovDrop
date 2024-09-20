@@ -1,0 +1,19 @@
+{
+  "/_not-found": "app/_not-found.js",
+  "/cadastro/page": "app/cadastro/page.js",
+  "/login/page": "app/login/page.js",
+  "/page": "app/page.js",
+  "/api/UploadComp/route": "app/api/UploadComp/route.js",
+  "/api/UploadDef/route": "app/api/UploadDef/route.js",
+  "/contas/fornecedores/[id]/page": "app/contas/fornecedores/[id]/page.js",
+  "/contas/contas_a_pagar/page": "app/contas/contas_a_pagar/page.js",
+  "/contas/fixas/page": "app/contas/fixas/page.js",
+  "/contas/fixas/add/page": "app/contas/fixas/add/page.js",
+  "/contas/fornecedores/add/page": "app/contas/fornecedores/add/page.js",
+  "/contas/page": "app/contas/page.js",
+  "/contas/fixas/[id]/page": "app/contas/fixas/[id]/page.js",
+  "/contas/pagas/page": "app/contas/pagas/page.js",
+  "/contas/variadas/page": "app/contas/variadas/page.js",
+  "/contas/variadas/add/page": "app/contas/variadas/add/page.js",
+  "/contas/fornecedores/page": "app/contas/fornecedores/page.js"
+}
